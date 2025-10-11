@@ -3,9 +3,18 @@ import yaml
 import random
 import time
 import math
+import os
+import sys
 import gz.transport13 as gz
-import thermal_msg_pb2
 from shapely.geometry import Polygon, Point
+
+# Add GZ_Msgs directory to Python path for protobuf imports
+current_dir = os.path.dirname(os.path.abspath(__file__))
+gz_msgs_dir = os.path.join(current_dir, '..', 'GZ_Msgs', 'python')
+if os.path.exists(gz_msgs_dir):
+    sys.path.insert(0, gz_msgs_dir)
+
+import thermal_msg_pb2
 
 # ROS2 Imports
 import rclpy

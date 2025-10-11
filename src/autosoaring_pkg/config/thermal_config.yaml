@@ -1,4 +1,4 @@
-qgc_plan_path: "/home/radhouene/autosoaring_app/src/autosoaring_pkg/config/area2.plan"
+qgc_plan_path: "area2.plan"  # Relative path - will be resolved from package config directory
 num_thermals: 12
 min_distance_between_thermals: 200.0
 zi_range: [1250.0, 1250.0]       

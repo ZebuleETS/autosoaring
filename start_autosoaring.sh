@@ -5,8 +5,11 @@
 
 echo " Starting AutoSoaring UAV System..."
 
-# Set the workspace directory
-WORKSPACE_DIR="/home/radhouene/autosoaring_app"
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Set the workspace directory (assume autosoaring_app is in the same parent directory)
+WORKSPACE_DIR="$(dirname "$SCRIPT_DIR")/autosoaring_app"
 cd "$WORKSPACE_DIR"
 
 # Source ROS2 environment
@@ -18,7 +21,7 @@ echo " Sourcing workspace..."
 source install/setup.bash
 
 # Set the source directory for Python files
-SRC_DIR="/home/radhouene/autosoaring_app/src/autosoaring_pkg/autosoaring_pkg"
+SRC_DIR="$WORKSPACE_DIR/src/autosoaring_pkg/autosoaring_pkg"
 
 # Get the package directory for config files
 PKG_DIR=$(ros2 pkg prefix autosoaring_pkg)/share/autosoaring_pkg

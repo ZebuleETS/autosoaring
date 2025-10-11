@@ -1273,7 +1273,9 @@ async def run():
         original_mission = None
 
     ros_node.get_logger().info("Uploading mission from .plan...")
-    plan_file = '/home/radhouene/autosoaring_app/src/autosoaring_pkg/config/area2.plan'
+    # Get the package directory for config files
+    pkg_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'config')
+    plan_file = os.path.join(pkg_dir, 'area2.plan')
     await waypoints_mission(drone, plan_file)
     
     # Load mission waypoints for enhanced autosoaring scenario
