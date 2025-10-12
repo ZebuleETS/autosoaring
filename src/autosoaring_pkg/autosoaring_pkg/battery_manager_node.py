@@ -37,12 +37,12 @@ class BatteryManager(Node):
     def airspeed_callback(self, msg):
         """Updates airspeed from MAVSDK main program."""
         self.airspeed = msg.data
-        self.get_logger().debug(f"Received Airspeed: {self.airspeed} m/s")
+        # self.get_logger().debug(f"Received Airspeed: {self.airspeed} m/s")
 
     def throttle_callback(self, msg):
         """Updates throttle from MAVSDK main program."""
         self.throttle = msg.data
-        self.get_logger().debug(f"Received Throttle: {self.throttle}")
+        # self.get_logger().debug(f"Received Throttle: {self.throttle}")
 
     def compute_power_consumption(self):
         """Computes power consumption using airspeed and throttle."""

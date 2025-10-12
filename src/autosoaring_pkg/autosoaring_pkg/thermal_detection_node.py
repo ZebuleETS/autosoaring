@@ -9,6 +9,7 @@ import signal
 from collections import deque
 import threading
 import json
+import yaml
 from std_msgs.msg import String, Float32MultiArray
 import os  # For file saving
 from mavsdk.action import OrbitYawBehavior
@@ -23,17 +24,18 @@ from example_interfaces.srv import Trigger
 telemetry_data = []  # (time, altitude, climb_rate, v_energy, throttle, airspeed)
 thermal_events = []
 thermal_detection_complete = False  # Track if we have Enter → Core → End cycle
+config_data = None  # Global config data
 
 # Thermal exploitation variables
 exploiting_thermal = False
 thermal_center_lat = None
 thermal_center_lon = None
 thermal_center_alt = None
-orbit_radius = 40.0  # meters
+orbit_radius = 40.0  # meters (default, will be overridden by config)
 orbit_altitude = None
 original_mission = None
 mission_paused = False
-target_altitude = 600.0  # Target altitude for thermal exploitation (enhanced from 420m)
+target_altitude = 600.0  # Target altitude for thermal exploitation (default, will be overridden by config)
 exploited_thermals = set()  # Track exploited thermal locations to avoid re-exploitation
 
 
@@ -44,8 +46,8 @@ circle_center_lon = None
 circle_completed = False
 centering_active = False  # Whether centering is currently active
 centering_iteration = 0
-max_centering_iterations = 10  # Prevent infinite loops
-CLIMB_RATE_DIFF_THRESHOLD = 0.5  # Stop centering if max climb rate difference is less than 0.5 m/s
+max_centering_iterations = 10  # Prevent infinite loops (default, will be overridden by config)
+CLIMB_RATE_DIFF_THRESHOLD = 0.5  # Stop centering if max climb rate difference is less than 0.5 m/s (default, will be overridden by config)
 
 # Internal tracking for circle completion
 _circle_start_bearing = None
@@ -79,7 +81,13 @@ battery_service = None
 
 # ---------- Logging utilities ----------
 def save_log():
-    filename = "telemetry_log_detection.csv"
+    # Create flights_data directory if it doesn't exist
+    flights_data_dir = "flights_data"
+    if not os.path.exists(flights_data_dir):
+        os.makedirs(flights_data_dir)
+        print(f" Created directory: {flights_data_dir}")
+    
+    filename = os.path.join(flights_data_dir, "telemetry_log_detection.csv")
     with open(filename, mode='w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(["Time (s)", "Altitude (m)", "Climb Rate (m/s)", "V_Energy (m/s)", "Throttle (%)", "Airspeed (m/s)"])
@@ -108,7 +116,13 @@ def plot_telemetry_data():
     plt.xlabel("Time (s)")
     plt.tight_layout()
 
-    plot_filename = "telemetry_plot.png"
+    # Create flights_data directory if it doesn't exist
+    flights_data_dir = "flights_data"
+    if not os.path.exists(flights_data_dir):
+        os.makedirs(flights_data_dir)
+        print(f" Created directory: {flights_data_dir}")
+    
+    plot_filename = os.path.join(flights_data_dir, "telemetry_plot.png")
     plt.savefig(plot_filename, dpi=300, bbox_inches='tight')
     print(f"Telemetry plot saved to {os.path.abspath(plot_filename)}")
     plt.close()
@@ -123,8 +137,8 @@ def handle_exit(signum, frame):
     plot_telemetry_data()
     time.sleep(1.0)
     print("Telemetry analysis complete. Check the generated files:")
-    print("- telemetry_log_detection.csv: Raw telemetry data")
-    print("- telemetry_plot.png: Visual telemetry analysis")
+    print("- flights_data/telemetry_log_detection.csv: Raw telemetry data")
+    print("- flights_data/telemetry_plot.png: Visual telemetry analysis")
     rclpy.shutdown()
     exit(0)
 
@@ -739,15 +753,15 @@ async def detect_thermal(drone, alt_pub, airspeed_pub, throttle_pub, detection_p
     DETECTION_RATIO = 0.5
 
     # Thresholds
-    v_energy_min = 0.2
+    """v_energy_min = 0.2
     climb_min = 0.2
     throttle_max = 0.6
-    slope_threshold = 0.08
+    slope_threshold = 0.08"""
     
-    """v_energy_min = 0.7      # 5x increase (0.2 → 1.0)
+    v_energy_min = 0.7      # 5x increase (0.2 → 1.0)
     climb_min = 0.7         # 5x increase (0.2 → 1.0) 
-    throttle_max = 0.2      # Much more restrictive (0.6 → 0.2)
-    slope_threshold = 0.2"""
+    throttle_max = 0.2     # Much more restrictive (0.6 → 0.2)
+    slope_threshold = 0.2
     
     in_thermal = False
     detection_window = deque(maxlen=DETECTION_WINDOW)
@@ -1227,12 +1241,43 @@ async def emergency_landing(drone, node):
         node.get_logger().error(f" Emergency landing failed: {e}")
 
 # ---------- Main ----------
-async def run():
-    global ros_node, alt_pub, airspeed_pub, throttle_pub, pos_pub, battery_service, original_mission
+async def run(config_file=None):
+    global ros_node, alt_pub, airspeed_pub, throttle_pub, pos_pub, battery_service, original_mission, config_data
 
     # Init ROS2 node and publishers
     rclpy.init()
     ros_node = rclpy.create_node('thermal_detection_node')
+    
+    # Load configuration file
+    if config_file:
+        ros_node.get_logger().info(f"Loading config from: {config_file}")
+        try:
+            with open(config_file, 'r') as f:
+                config_data = yaml.safe_load(f)
+            ros_node.get_logger().info("Config loaded successfully")
+        except Exception as e:
+            ros_node.get_logger().error(f"Failed to load config file: {e}")
+            ros_node.get_logger().error("Using default configuration")
+            config_data = {}
+    else:
+        ros_node.get_logger().info("No config file provided, using default configuration")
+        config_data = {}
+    
+    # Load configurable parameters from config
+    global target_altitude, orbit_radius, max_centering_iterations, CLIMB_RATE_DIFF_THRESHOLD, circle_radius
+    if config_data:
+        target_altitude = config_data.get('target_altitude', target_altitude)
+        orbit_radius = config_data.get('orbit_radius', orbit_radius)
+        max_centering_iterations = config_data.get('max_centering_iterations', max_centering_iterations)
+        CLIMB_RATE_DIFF_THRESHOLD = config_data.get('climb_rate_diff_threshold', CLIMB_RATE_DIFF_THRESHOLD)
+        circle_radius = orbit_radius  # Keep circle_radius in sync with orbit_radius
+        
+        # ros_node.get_logger().info(f"Configuration loaded:")
+        # ros_node.get_logger().info(f"  Target altitude: {target_altitude}m")
+        # ros_node.get_logger().info(f"  Orbit radius: {orbit_radius}m")
+        # ros_node.get_logger().info(f"  Max centering iterations: {max_centering_iterations}")
+        # ros_node.get_logger().info(f"  Climb rate threshold: {CLIMB_RATE_DIFF_THRESHOLD}m/s")
+    
     alt_pub = ros_node.create_publisher(Float32, '/uav/altitude', 10)
     airspeed_pub = ros_node.create_publisher(Float32, '/uav/airspeed', 10)
     throttle_pub = ros_node.create_publisher(Float32, '/uav/throttle', 10)
@@ -1273,31 +1318,51 @@ async def run():
         original_mission = None
 
     ros_node.get_logger().info("Uploading mission from .plan...")
-    # Get the package directory for config files
-    pkg_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'config')
-    plan_file = os.path.join(pkg_dir, 'area2.plan')
+    
+    # Get plan file from config or use default
+    if config_data and 'qgc_plan_path' in config_data:
+        plan_path = config_data['qgc_plan_path']
+        # ros_node.get_logger().info(f"Using plan file from config: {plan_path}")
+    else:
+        plan_path = 'area2.plan'  # Default fallback
+        # ros_node.get_logger().info(f"Using default plan file: {plan_path}")
+    
+    # Resolve plan file path
+    if not os.path.isabs(plan_path):
+        # If it's a relative path, resolve it relative to the config file directory
+        if config_file:
+            config_dir = os.path.dirname(config_file)
+            plan_file = os.path.join(config_dir, plan_path)
+        else:
+            # Fallback to package config directory
+            pkg_dir = os.path.join(os.path.dirname(__file__), '..', 'config')
+            plan_file = os.path.join(pkg_dir, plan_path)
+    else:
+        plan_file = plan_path
     
     # Check if plan file exists
     if not os.path.exists(plan_file):
         ros_node.get_logger().error(f"Plan file not found: {plan_file}")
         ros_node.get_logger().error(f"Current working directory: {os.getcwd()}")
         ros_node.get_logger().error(f"Script directory: {os.path.dirname(__file__)}")
-        ros_node.get_logger().error(f"Package directory: {pkg_dir}")
+        if config_file:
+            ros_node.get_logger().error(f"Config file directory: {os.path.dirname(config_file)}")
         ros_node.get_logger().error("Available files in config directory:")
-        if os.path.exists(pkg_dir):
-            for file in os.listdir(pkg_dir):
+        config_dir = os.path.dirname(plan_file) if os.path.dirname(plan_file) else os.path.join(os.path.dirname(__file__), '..', 'config')
+        if os.path.exists(config_dir):
+            for file in os.listdir(config_dir):
                 ros_node.get_logger().error(f"  - {file}")
         else:
-            ros_node.get_logger().error(f"Config directory does not exist: {pkg_dir}")
+            ros_node.get_logger().error(f"Config directory does not exist: {config_dir}")
         return
     
-    ros_node.get_logger().info(f"Using plan file: {plan_file}")
+    # ros_node.get_logger().info(f"Using plan file: {plan_file}")
     await waypoints_mission(drone, plan_file)
     
     # Load mission waypoints for enhanced autosoaring scenario
-    ros_node.get_logger().info("Loading mission waypoints for glide analysis...")
+    # ros_node.get_logger().info("Loading mission waypoints for glide analysis...")
     load_mission_waypoints(plan_file)
-    ros_node.get_logger().info(f"Loaded {len(mission_waypoints)} waypoints for altitude monitoring")
+    # ros_node.get_logger().info(f"Loaded {len(mission_waypoints)} waypoints for altitude monitoring")
 
     ros_node.get_logger().info("Arming...")
     await drone.action.arm()
@@ -1347,7 +1412,18 @@ async def run():
     rclpy.shutdown()
 
 def main(args=None):
-    asyncio.run(run())
+    import sys
+    config_file = None
+    
+    # Check for config file argument
+    if len(sys.argv) > 1:
+        config_file = sys.argv[1]
+        print(f"Using config file: {config_file}")
+    else:
+        print("No config file provided, using default configuration")
+        print("Usage: ros2 run autosoaring_pkg thermal_detection_node [path_to_config.yaml]")
+    
+    asyncio.run(run(config_file))
 
 if __name__ == "__main__":
     main()

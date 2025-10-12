@@ -60,6 +60,7 @@ class ThermalMappingNode(Node):
         # Set up signal handlers for immediate data saving
         signal.signal(signal.SIGINT, self.signal_handler)
         signal.signal(signal.SIGTERM, self.signal_handler)
+        print(" Signal handlers registered for Ctrl+C and SIGTERM")
         
         # Subscribers
         self.create_subscription(
@@ -75,24 +76,33 @@ class ThermalMappingNode(Node):
         self.create_subscription(
             String, '/uav/flight_mode', self.callback_flight_mode, 10)
         
-        # Timer for status logging
-        self.create_timer(5.0, self.log_status)
+        # Timer for status logging (commented out to reduce verbose output)
+        # self.create_timer(5.0, self.log_status)
         
-        self.get_logger().info(" Thermal Mapping Node started with comprehensive logging!")
-        self.get_logger().info(" Subscribed to topics:")
-        self.get_logger().info("   - /thermal_detected")
-        self.get_logger().info("   - /thermal_skipped") 
-        self.get_logger().info("   - /generated_thermals")
-        self.get_logger().info("   - /uav/position")
-        self.get_logger().info("   - /uav/flight_mode")
+        # Keep a minimal timer to ensure the node stays responsive to signals
+        self.create_timer(1.0, self.minimal_heartbeat)
+        
+        self.get_logger().info(" Thermal Mapping Node started!")
+        # self.get_logger().info(" Subscribed to topics:")
+        # self.get_logger().info("   - /thermal_detected")
+        # self.get_logger().info("   - /thermal_skipped") 
+        # self.get_logger().info("   - /generated_thermals")
+        # self.get_logger().info("   - /uav/position")
+        # self.get_logger().info("   - /uav/flight_mode")
         
         # Initial plot will be triggered when first thermal data is received
         # No timer needed - will be triggered by thermal data callbacks
 
+    def minimal_heartbeat(self):
+        """Minimal heartbeat to keep the node responsive to signals"""
+        # Do nothing, just keep the node alive and responsive
+        pass
+
     def signal_handler(self, signum, frame):
         """Handle shutdown signals to save data immediately"""
+        print(f"\n SIGNAL HANDLER TRIGGERED! Signal {signum} received.")
         if not self.data_saved:
-            print(f"\n Signal {signum} received. Saving data immediately...")
+            print(f" Saving data immediately...")
             self.data_saved = True
             self.save_data_to_csv()
             print(" Data saved successfully!")
@@ -115,6 +125,11 @@ class ThermalMappingNode(Node):
                 print(f" Error creating final thermal map: {e}")
         else:
             print(f"\n Signal {signum} received. Data already saved.")
+        
+        print("\n" + "="*60)
+        print(" Final thermal map created!")
+        print(" Close the plot window when you're done viewing.")
+        print("="*60)
         
         # Exit gracefully
         sys.exit(0)
@@ -147,7 +162,7 @@ class ThermalMappingNode(Node):
         if self.initial_plot_created:
             return
             
-        self.get_logger().info(" Creating initial thermal map with received thermal data...")
+        # self.get_logger().info(" Creating initial thermal map with received thermal data...")
         try:
             filename = self.create_simple_plot_with_title("Initial Thermal Map - First Thermal Data Received")
             if filename:
@@ -156,9 +171,10 @@ class ThermalMappingNode(Node):
                 # Try to open the initial plot
                 try:
                     subprocess.Popen(['xdg-open', filename])
-                    self.get_logger().info(" Initial thermal map opened in image viewer")
+                    # self.get_logger().info(" Initial thermal map opened in image viewer")
                 except:
-                    self.get_logger().info(f" Please open manually: {filename}")
+                    # self.get_logger().info(f" Please open manually: {filename}")
+                    pass
             else:
                 self.get_logger().warn(" No initial plot created (no data available yet)")
         except Exception as e:
@@ -367,7 +383,7 @@ class ThermalMappingNode(Node):
                 else:
                     self.get_logger().warn(f"     Incomplete thermal data at index {i}, need 3 elements but only have {len(data) - i}")
             
-            self.get_logger().info(f" Generated {len(data)//3} thermals received and stored")
+            # self.get_logger().info(f" Generated {len(data)//3} thermals received and stored")
             
             # Create initial plot when first thermal data is received
             if not self.initial_plot_created and self.generated_points:
@@ -426,14 +442,20 @@ class ThermalMappingNode(Node):
         """Save UAV 3D path and generated thermals data to CSV files"""
         try:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            print(f" Starting to save CSV data with timestamp: {timestamp}")
-            print(f" UAV Path 3D Points available: {len(self.uav_path_3d)}")
-            print(f" Generated Points available: {len(self.generated_points)}")
+            self.get_logger().info(f" Saving CSV data with timestamp: {timestamp}")
+            # print(f" UAV Path 3D Points available: {len(self.uav_path_3d)}")
+            # print(f" Generated Points available: {len(self.generated_points)}")
+            
+            # Create flights_data directory if it doesn't exist
+            flights_data_dir = "flights_data"
+            if not os.path.exists(flights_data_dir):
+                os.makedirs(flights_data_dir)
+                print(f" Created directory: {flights_data_dir}")
             
             # 1. Save UAV 3D path data
             if self.uav_path_3d:
-                uav_3d_filename = f"uav_path_3d_{timestamp}.csv"
-                print(f" Creating UAV 3D path file: {uav_3d_filename}")
+                uav_3d_filename = os.path.join(flights_data_dir, f"uav_path_3d_{timestamp}.csv")
+                # print(f" Creating UAV 3D path file: {uav_3d_filename}")
                 
                 with open(uav_3d_filename, 'w', newline='') as csvfile:
                     fieldnames = ['timestamp', 'lat', 'lon', 'altitude', 'throttle', 'time_from_start']
@@ -451,18 +473,19 @@ class ThermalMappingNode(Node):
                         })
                         
                         # Print progress every 50 points
-                        if (i + 1) % 50 == 0:
-                            print(f"    Written {i + 1}/{len(self.uav_path_3d)} points...")
+                        # if (i + 1) % 50 == 0:
+                        #     print(f"    Written {i + 1}/{len(self.uav_path_3d)} points...")
                 
-                print(f" UAV 3D path saved to: {uav_3d_filename}")
-                print(f" File size: {os.path.getsize(uav_3d_filename)} bytes")
+                self.get_logger().info(f" UAV 3D path saved to: {uav_3d_filename}")
+                # print(f" File size: {os.path.getsize(uav_3d_filename)} bytes")
             else:
-                print("  No UAV 3D path data to save")
+                # print("  No UAV 3D path data to save")
+                pass
             
             # 2. Save generated thermals data
             if self.generated_points:
-                generated_filename = f"generated_thermals_{timestamp}.csv"
-                print(f"💾 Creating generated thermals file: {generated_filename}")
+                generated_filename = os.path.join(flights_data_dir, f"generated_thermals_{timestamp}.csv")
+                # print(f"💾 Creating generated thermals file: {generated_filename}")
                 
                 with open(generated_filename, 'w', newline='') as csvfile:
                     fieldnames = ['thermal_id', 'lat', 'lon', 'radius_meters']
@@ -475,22 +498,24 @@ class ThermalMappingNode(Node):
                             'lon': lon,
                             'radius_meters': 70.0
                         })
-                print(f" Generated thermals saved to: {generated_filename}")
+                self.get_logger().info(f" Generated thermals saved to: {generated_filename}")
             else:
-                print("  No generated thermals data to save")
+                # print("  No generated thermals data to save")
+                pass
             
-            print(f"\n Data saved with timestamp: {timestamp}")
-            print(" CSV files created:")
-            if self.uav_path_3d:
-                print(f"   - {uav_3d_filename}")
-            if self.generated_points:
-                print(f"   - {generated_filename}")
+            self.get_logger().info(f" Data saved with timestamp: {timestamp}")
+            # print(" CSV files created:")
+            # if self.uav_path_3d:
+            #     print(f"   - {uav_3d_filename}")
+            # if self.generated_points:
+            #     print(f"   - {generated_filename}")
             
             # Verify files were created
             if self.uav_path_3d and os.path.exists(uav_3d_filename):
-                print(f" Verified: {uav_3d_filename} exists and is readable")
+                # print(f" Verified: {uav_3d_filename} exists and is readable")
+                pass
             elif self.uav_path_3d:
-                print(f" ERROR: {uav_3d_filename} was not created!")
+                self.get_logger().error(f" ERROR: {uav_3d_filename} was not created!")
             
         except Exception as e:
             print(f" Error saving CSV data: {e}")
@@ -500,10 +525,12 @@ class ThermalMappingNode(Node):
     def create_simple_plot_with_title(self, title="Thermal Mapping - Generated Thermals (70m radius)"):
         """Create a simple plot to verify data with custom title"""
         try:
-            self.get_logger().info(f" Creating plot: {title}")
+            print(f" Creating plot: {title}")
+            print(f"   UAV path points: {len(self.uav_path)}")
+            print(f"   Generated points: {len(self.generated_points)}")
             
             if not self.uav_path and not self.generated_points:
-                self.get_logger().warn("  No data to plot!")
+                print("    No data to plot!")
                 return None
             
             fig, ax = plt.subplots(figsize=(12, 10))
@@ -635,23 +662,29 @@ class ThermalMappingNode(Node):
             ax.set_aspect('equal', adjustable='box')
             
             # Save plot with appropriate filename based on title
+            # Create flights_data directory if it doesn't exist
+            flights_data_dir = "flights_data"
+            if not os.path.exists(flights_data_dir):
+                os.makedirs(flights_data_dir)
+                print(f" Created directory: {flights_data_dir}")
+            
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             if "Initial" in title:
-                filename = f"thermal_initial_map_{timestamp}.png"
+                filename = os.path.join(flights_data_dir, f"thermal_initial_map_{timestamp}.png")
             elif "Final" in title:
-                filename = f"thermal_final_map_{timestamp}.png"
+                filename = os.path.join(flights_data_dir, f"thermal_final_map_{timestamp}.png")
             else:
-                filename = f"thermal_simple_plot_{timestamp}.png"
+                filename = os.path.join(flights_data_dir, f"thermal_simple_plot_{timestamp}.png")
                 
-            print(f" Saving plot to: {filename}")
+            # print(f" Saving plot to: {filename}")
             plt.savefig(filename, dpi=300, bbox_inches='tight')
-            print(f" Plot saved successfully: {filename}")
-            self.get_logger().info(f"    Plot saved as: {filename}")
+            print(f"  Plot saved successfully: {filename}")
+            self.get_logger().info(f" Plot saved as: {filename}")
             
             # Save plot and close figure (don't show interactive window)
-            print(" Plot created and saved!")
             plt.close(fig)  # Close the figure to free memory
             
+            print(f"  Returning filename: {filename}")
             return filename  # Return the filename so main() can use it
             
         except Exception as e:
@@ -680,9 +713,9 @@ def main():
     except KeyboardInterrupt:
         node.get_logger().info(" Ctrl+C detected. Signal handler will save data...")
         
-        # The signal handler will save the data automatically
+        # The signal handler will save the data and create the final map automatically
         # Just wait a moment for the signal handler to complete
-        time.sleep(1)
+        time.sleep(2)
         
         # Shutdown ROS2 to avoid conflicts
         try:
@@ -691,52 +724,10 @@ def main():
         except Exception as e:
             print(f"ROS2 shutdown error (ignored): {e}")
         
-        # Create final plot AFTER ROS2 shutdown
-        png_filename = node.create_simple_plot_with_title("Final Thermal Map - Simulation End")
-        
         print("\n" + "="*60)
-        print(" Final thermal map is now open!")
-        print(" Close the plot window when you're done viewing.")
+        print("  Final thermal map should be created by signal handler!")
+        print(" Check for PNG files in the current directory.")
         print("="*60)
-        
-        # Open the PNG file in a separate process
-        # Use the filename returned from create_simple_plot
-        
-        print(f"🔍 Looking for PNG file: {png_filename}")
-        print(f"🔍 Current directory: {os.getcwd()}")
-        
-        if os.path.exists(png_filename):
-            print(f" PNG file found: {png_filename}")
-            print(f" File size: {os.path.getsize(png_filename)} bytes")
-            try:
-                # Try to open with default image viewer
-                print(" Attempting to open PNG file...")
-                subprocess.Popen(['xdg-open', png_filename])
-                print(" PNG file opened in image viewer")
-            except Exception as e:
-                print(f"  Could not open PNG automatically: {e}")
-                print(f" Please open the file manually: {png_filename}")
-                # Try alternative method
-                try:
-                    subprocess.Popen(['eog', png_filename])  # Eye of GNOME
-                    print(" PNG file opened with eog")
-                except:
-                    try:
-                        subprocess.Popen(['gimp', png_filename])  # GIMP
-                        print(" PNG file opened with GIMP")
-                    except:
-                        print(f" Please open the file manually: {png_filename}")
-        else:
-            print(f"  PNG file not found: {png_filename}")
-            print(f" Checking current directory contents:")
-            try:
-                files = [f for f in os.listdir('.') if f.endswith('.png')]
-                if files:
-                    print(f" Found PNG files: {files}")
-                else:
-                    print(" No PNG files found in current directory")
-            except Exception as e:
-                print(f" Error listing directory: {e}")
 
 if __name__ == '__main__':
     main()

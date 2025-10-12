@@ -6,7 +6,7 @@
 # Get the directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AUTOSOARING_DIR="$SCRIPT_DIR"
-AUTOSOARING_APP_DIR="$(dirname "$SCRIPT_DIR")/autosoaring_app"
+AUTOSOARING_WORKSPACE_DIR="$SCRIPT_DIR"
 
 # Colors for output
 RED='\033[0;31m'
@@ -48,10 +48,10 @@ show_usage() {
 setup_environment() {
     echo -e "${BLUE}Setting up AutoSoaring environment...${NC}"
     
-    # Check if autosoaring_app directory exists
-    if [ ! -d "$AUTOSOARING_APP_DIR" ]; then
-        echo -e "${RED}Error: autosoaring_app directory not found at: $AUTOSOARING_APP_DIR${NC}"
-        echo -e "${YELLOW}Please ensure autosoaring_app is in the same parent directory as autosoaring${NC}"
+    # Check if autosoaring directory exists
+    if [ ! -d "$AUTOSOARING_WORKSPACE_DIR" ]; then
+        echo -e "${RED}Error: autosoaring directory not found at: $AUTOSOARING_WORKSPACE_DIR${NC}"
+        echo -e "${YELLOW}Please ensure you are running this script from the autosoaring directory${NC}"
         return 1
     fi
     
@@ -119,7 +119,7 @@ setup_environment() {
     echo -e "${BLUE}Setting up environment variables...${NC}"
     
     export AUTOSOARING_DIR="$AUTOSOARING_DIR"
-    export AUTOSOARING_APP_DIR="$AUTOSOARING_APP_DIR"
+    export AUTOSOARING_WORKSPACE_DIR="$AUTOSOARING_WORKSPACE_DIR"
     
     echo -e "${GREEN}✓ Environment variables set${NC}"
     echo ""
@@ -174,12 +174,12 @@ build_gz_msgs() {
 build_workspace() {
     echo -e "${BLUE}Building ROS2 workspace...${NC}"
     
-    if [ ! -d "$AUTOSOARING_APP_DIR" ]; then
-        echo -e "${RED}Error: autosoaring_app directory not found${NC}"
+    if [ ! -d "$AUTOSOARING_WORKSPACE_DIR" ]; then
+        echo -e "${RED}Error: autosoaring directory not found${NC}"
         return 1
     fi
     
-    cd "$AUTOSOARING_APP_DIR"
+    cd "$AUTOSOARING_WORKSPACE_DIR"
     
     echo -e "${BLUE}Sourcing ROS2 environment...${NC}"
     source /opt/ros/humble/setup.bash

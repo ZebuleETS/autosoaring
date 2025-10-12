@@ -1,6 +1,15 @@
+# Mission Configuration
 qgc_plan_path: "area2.plan"  # Relative path - will be resolved from package config directory
+
+# Thermal Generation Configuration
 num_thermals: 12
 min_distance_between_thermals: 200.0
 zi_range: [1250.0, 1250.0]       
 w_star_range: [5,5]         
-lifespan_range: [1200000.0, 1800000.0] 
+lifespan_range: [1200000.0, 1800000.0]
+
+# Thermal Detection Configuration
+target_altitude: 600.0  # Target altitude for thermal exploitation
+orbit_radius: 40.0  # Orbit radius in meters
+max_centering_iterations: 10  # Maximum centering iterations
+climb_rate_diff_threshold: 0.5  # Stop centering if max climb rate difference is less than this 

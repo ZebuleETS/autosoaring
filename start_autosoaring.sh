@@ -8,8 +8,8 @@ echo " Starting AutoSoaring UAV System..."
 # Get the directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Set the workspace directory (assume autosoaring_app is in the same parent directory)
-WORKSPACE_DIR="$(dirname "$SCRIPT_DIR")/autosoaring_app"
+# Set the workspace directory (use the current autosoaring directory)
+WORKSPACE_DIR="$SCRIPT_DIR"
 cd "$WORKSPACE_DIR"
 
 # Source ROS2 environment
@@ -18,13 +18,13 @@ source /opt/ros/humble/setup.bash
 
 # Source the workspace
 echo " Sourcing workspace..."
-source install/setup.bash
+source src/autosoaring_pkg/install/setup.bash
 
 # Set the source directory for Python files
 SRC_DIR="$WORKSPACE_DIR/src/autosoaring_pkg/autosoaring_pkg"
 
 # Get the package directory for config files (use relative path since package may not be installed)
-PKG_DIR="$SCRIPT_DIR/src/autosoaring_pkg"
+PKG_DIR="$WORKSPACE_DIR/src/autosoaring_pkg"
 CONFIG_FILE="$PKG_DIR/config/thermal_config.yaml"
 
 echo " Starting AutoSoaring components..."
@@ -132,9 +132,9 @@ echo " System is running. Press Ctrl+C to stop all nodes..."
                 
                 # Check if thermal map was created
                 echo " Checking for thermal map files..."
-                if ls thermal_simple_plot_*.png 1> /dev/null 2>&1; then
+                if ls flights_data/thermal_*.png 1> /dev/null 2>&1; then
                     echo " Thermal map found! Opening..."
-                    latest_thermal_map=$(ls -t thermal_simple_plot_*.png | head -1)
+                    latest_thermal_map=$(ls -t flights_data/thermal_*.png | head -1)
                     echo " Latest thermal map: $latest_thermal_map"
                     xdg-open "$latest_thermal_map" 2>/dev/null || echo "📁 Please open manually: $latest_thermal_map"
                 else
@@ -143,9 +143,9 @@ echo " System is running. Press Ctrl+C to stop all nodes..."
                 
                 # Check if 3D path data was created
                 echo " Checking for 3D path data files..."
-                if ls uav_path_3d_*.csv 1> /dev/null 2>&1; then
+                if ls flights_data/uav_path_3d_*.csv 1> /dev/null 2>&1; then
                     echo " 3D path data found!"
-                    latest_3d_path=$(ls -t uav_path_3d_*.csv | head -1)
+                    latest_3d_path=$(ls -t flights_data/uav_path_3d_*.csv | head -1)
                     echo " Latest 3D path data: $latest_3d_path"
                     echo " You can now run: python3 src/autosoaring_pkg/autosoaring_pkg/uav_3d_path_visualizer.py"
                     echo "   And select option 0 to view the latest 3D path visualization"

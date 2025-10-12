@@ -1,0 +1,6 @@
+# Autosoaring System Python Dependencies
+pyyaml>=6.0
+matplotlib>=3.5.0
+numpy>=1.21.0
+shapely>=1.8.0
+mavsdk>=1.4.0

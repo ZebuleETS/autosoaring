@@ -34,6 +34,7 @@ def generate_launch_description():
         package='autosoaring_pkg',
         executable='thermal_detection_node',
         name='thermal_detection_node',
+        arguments=[config_file],
         output='screen'
     )
     
@@ -58,3 +59,8 @@ def generate_launch_description():
         thermal_mapping_node,
         battery_manager_node,
     ])
+
+
+
+
+

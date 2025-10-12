@@ -80,7 +80,7 @@ class ThermalGenerator(Node):
         else:
             self.plan_file = plan_path
         
-        self.get_logger().info(f"Plan file path: {self.plan_file}")
+        # self.get_logger().info(f"Plan file path: {self.plan_file}")
         self.n_thermals = cfg['num_thermals']
         self.zi_range = cfg['zi_range']
         self.w_star_range = cfg['w_star_range']
@@ -96,8 +96,8 @@ class ThermalGenerator(Node):
         # Geofence
         self.gps_polygon = self.read_geofence(self.plan_file)
         self.bounding_box = self.gps_polygon.bounds
-        self.get_logger().info(f"Geofence bounds: {self.bounding_box}")
-        self.get_logger().info(f"Minimum distance between thermals: {self.min_distance}m")
+        # self.get_logger().info(f"Geofence bounds: {self.bounding_box}")
+        # self.get_logger().info(f"Minimum distance between thermals: {self.min_distance}m")
 
         # Gazebo publisher
         self.gz_node = gz.Node()
@@ -201,10 +201,10 @@ class ThermalGenerator(Node):
         self.gz_pub.publish(msg)
         self.ros_pub.publish(ros_msg)
 
-        self.get_logger().info(
-            f"Published {len(thermals_to_publish)} new thermals at time {self.sim_time}s"
-        )
-        self.get_logger().info(f"ROS message data: {ros_msg.data}")
+        # self.get_logger().info(
+        #     f"Published {len(thermals_to_publish)} new thermals at time {self.sim_time}s"
+        # )
+        # self.get_logger().info(f"ROS message data: {ros_msg.data}")
 
     def run_loop(self):
         while rclpy.ok():
