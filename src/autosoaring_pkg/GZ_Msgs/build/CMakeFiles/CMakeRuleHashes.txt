@@ -1,0 +1,4 @@
+# Hashes of file build rules.
+00f43e756c6499e55c539fa190f12efc msgs-nsgs.gz_desc
+79f1a2a15d0a93a3eb2db0c64c707b08 msgs-nsgs_genmsg/gz/msgs/MessageTypes.hh
+8c59f994334139298502adf18e4c6417 msgs-nsgs_genmsg/gz/msgs/thermal.pb.h

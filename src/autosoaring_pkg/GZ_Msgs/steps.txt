@@ -1,0 +1,16 @@
+export GZ_DESCRIPTOR_PATH=/home/radhouene/custom_messages/build
+gz msg -l | grep "gz.msgs.Thermal"
+gz msg --info gz.msgs.Thermal
+echo 'export GZ_DESCRIPTOR_PATH=/home/radhouene/custom_messages/build' >> ~/.bashrc
+source ~/.bashrc   # or source ~/.zshrc
+
+
+compile for python 
+protoc --proto_path=/home/radhouene/custom_messages/gz/msgs --python_out=/home/radhouene/custom_messages/python /home/radhouene/custom_messages/gz/msgs/thermal.proto
+
+nano ~/.bashrc  # or ~/.zshrc
+
+export PYTHONPATH=$PYTHONPATH:/home/radhouene/custom_messages/python (add this line to set python path)
+
+source ~/.bashrc  # or ~/.zshrc
+

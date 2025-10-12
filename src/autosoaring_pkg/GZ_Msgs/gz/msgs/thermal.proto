@@ -1,0 +1,14 @@
+syntax = "proto3";
+package gz.msgs;
+message Thermal {
+  int64 id = 1 ;
+  float x = 2;         
+  float y = 3;         
+  float zi = 4;  
+  float wi = 5;  
+  float lifetime = 6; 
+  float birth_time = 7;
+}
+message ThermalGroup {
+  repeated Thermal thermals = 1;  // A group of thermals
+}
