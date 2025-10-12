@@ -60,10 +60,27 @@ class ThermalGenerator(Node):
         super().__init__('thermal_generator_node')
         self.get_logger().info("Thermal Generator Started")
 
+        # Check if config file exists
+        if not os.path.exists(config_file):
+            self.get_logger().error(f"Config file not found: {config_file}")
+            self.get_logger().error(f"Current working directory: {os.getcwd()}")
+            self.get_logger().error("Please ensure the config file path is correct")
+            raise FileNotFoundError(f"Config file not found: {config_file}")
+
+        self.get_logger().info(f"Loading config from: {config_file}")
         with open(config_file, 'r') as f:
             cfg = yaml.safe_load(f)
 
-        self.plan_file = cfg['qgc_plan_path']
+        # Resolve plan file path relative to config directory
+        plan_path = cfg['qgc_plan_path']
+        if not os.path.isabs(plan_path):
+            # If it's a relative path, resolve it relative to the config file directory
+            config_dir = os.path.dirname(config_file)
+            self.plan_file = os.path.join(config_dir, plan_path)
+        else:
+            self.plan_file = plan_path
+        
+        self.get_logger().info(f"Plan file path: {self.plan_file}")
         self.n_thermals = cfg['num_thermals']
         self.zi_range = cfg['zi_range']
         self.w_star_range = cfg['w_star_range']

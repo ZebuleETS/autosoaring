@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/radhouene/custom_messages
+CMAKE_SOURCE_DIR = /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/radhouene/custom_messages/build
+CMAKE_BINARY_DIR = /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/msgs-nsgs.dir/depend.make
@@ -70,8 +70,8 @@ include CMakeFiles/msgs-nsgs.dir/progress.make
 include CMakeFiles/msgs-nsgs.dir/flags.make
 
 msgs-nsgs_genmsg/gz/msgs/thermal.pb.h: ../gz/msgs/thermal.proto
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/radhouene/custom_messages/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Running protoc on /home/radhouene/custom_messages/gz/msgs/thermal.proto"
-	cd /home/radhouene/custom_messages && /usr/bin/python3.10 /usr//bin/gz-msgs10_generate.py --protoc-exec /usr/bin/protoc --gz-generator-bin /usr//bin/gz-msgs10_protoc_plugin --proto-path /home/radhouene/custom_messages --input-path /home/radhouene/custom_messages/gz/msgs/thermal.proto --dependency-proto-descs /usr/share/gz/protos/gz-msgs10.gz_desc --generate-cpp --output-cpp-path /home/radhouene/custom_messages/build/msgs-nsgs_genmsg --generate-python --output-python-path /home/radhouene/custom_messages/build/msgs-nsgs_genmsg/python/
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Running protoc on /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/gz/msgs/thermal.proto"
+	cd /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs && /usr/bin/python3.10 /usr//bin/gz-msgs10_generate.py --protoc-exec /usr/bin/protoc --gz-generator-bin /usr//bin/gz-msgs10_protoc_plugin --proto-path /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs --input-path /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/gz/msgs/thermal.proto --dependency-proto-descs /usr/share/gz/protos/gz-msgs10.gz_desc --generate-cpp --output-cpp-path /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/msgs-nsgs_genmsg --generate-python --output-python-path /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/msgs-nsgs_genmsg/python/
 
 msgs-nsgs_genmsg/gz/msgs/details/thermal.pb.h: msgs-nsgs_genmsg/gz/msgs/thermal.pb.h
 	@$(CMAKE_COMMAND) -E touch_nocreate msgs-nsgs_genmsg/gz/msgs/details/thermal.pb.h
@@ -86,43 +86,43 @@ msgs-nsgs_genmsg/python/gz/msgs/thermal_pb2.py: msgs-nsgs_genmsg/gz/msgs/thermal
 	@$(CMAKE_COMMAND) -E touch_nocreate msgs-nsgs_genmsg/python/gz/msgs/thermal_pb2.py
 
 msgs-nsgs_genmsg/gz/msgs/MessageTypes.hh: msgs-nsgs_genmsg/gz_msgs_thermal.pb_index
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/radhouene/custom_messages/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Running factory generator"
-	cd /home/radhouene/custom_messages && /usr/bin/python3.10 /usr//bin/gz-msgs10_generate_factory.py --output-cpp-path /home/radhouene/custom_messages/build/msgs-nsgs_genmsg --proto-package gz.msgs --proto-path /home/radhouene/custom_messages --protos /home/radhouene/custom_messages/gz/msgs/thermal.proto
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Running factory generator"
+	cd /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs && /usr/bin/python3.10 /usr//bin/gz-msgs10_generate_factory.py --output-cpp-path /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/msgs-nsgs_genmsg --proto-package gz.msgs --proto-path /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs --protos /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/gz/msgs/thermal.proto
 
 msgs-nsgs_genmsg/gz/msgs/register.cc: msgs-nsgs_genmsg/gz/msgs/MessageTypes.hh
 	@$(CMAKE_COMMAND) -E touch_nocreate msgs-nsgs_genmsg/gz/msgs/register.cc
 
 msgs-nsgs.gz_desc: ../gz/msgs/thermal.proto
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/radhouene/custom_messages/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating descriptor set"
-	/usr/bin/protoc -I/home/radhouene/custom_messages --descriptor_set_out=msgs-nsgs.gz_desc --include_imports --descriptor_set_in="/usr/share/gz/protos/gz-msgs10.gz_desc" /home/radhouene/custom_messages/gz/msgs/thermal.proto
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating descriptor set"
+	/usr/bin/protoc -I/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs --descriptor_set_out=msgs-nsgs.gz_desc --include_imports --descriptor_set_in="/usr/share/gz/protos/gz-msgs10.gz_desc" /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/gz/msgs/thermal.proto
 
 CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.o: CMakeFiles/msgs-nsgs.dir/flags.make
 CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.o: msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc
 CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.o: CMakeFiles/msgs-nsgs.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/radhouene/custom_messages/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Wno-switch-default -Wno-float-equal -MD -MT CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.o -MF CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.o.d -o CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.o -c /home/radhouene/custom_messages/build/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Wno-switch-default -Wno-float-equal -MD -MT CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.o -MF CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.o.d -o CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.o -c /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc
 
 CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Wno-switch-default -Wno-float-equal -E /home/radhouene/custom_messages/build/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc > CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Wno-switch-default -Wno-float-equal -E /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc > CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.i
 
 CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Wno-switch-default -Wno-float-equal -S /home/radhouene/custom_messages/build/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc -o CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Wno-switch-default -Wno-float-equal -S /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc -o CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.s
 
 CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.o: CMakeFiles/msgs-nsgs.dir/flags.make
 CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.o: msgs-nsgs_genmsg/gz/msgs/register.cc
 CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.o: CMakeFiles/msgs-nsgs.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/radhouene/custom_messages/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Wno-switch-default -Wno-float-equal -MD -MT CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.o -MF CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.o.d -o CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.o -c /home/radhouene/custom_messages/build/msgs-nsgs_genmsg/gz/msgs/register.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Wno-switch-default -Wno-float-equal -MD -MT CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.o -MF CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.o.d -o CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.o -c /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/msgs-nsgs_genmsg/gz/msgs/register.cc
 
 CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Wno-switch-default -Wno-float-equal -E /home/radhouene/custom_messages/build/msgs-nsgs_genmsg/gz/msgs/register.cc > CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Wno-switch-default -Wno-float-equal -E /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/msgs-nsgs_genmsg/gz/msgs/register.cc > CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.i
 
 CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Wno-switch-default -Wno-float-equal -S /home/radhouene/custom_messages/build/msgs-nsgs_genmsg/gz/msgs/register.cc -o CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Wno-switch-default -Wno-float-equal -S /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/msgs-nsgs_genmsg/gz/msgs/register.cc -o CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.s
 
 # Object files for target msgs-nsgs
 msgs__nsgs_OBJECTS = \
@@ -143,7 +143,7 @@ libmsgs-nsgs.so.1.0.0: /usr/lib/x86_64-linux-gnu/libgz-utils2.so.2.2.1
 libmsgs-nsgs.so.1.0.0: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
 libmsgs-nsgs.so.1.0.0: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
 libmsgs-nsgs.so.1.0.0: CMakeFiles/msgs-nsgs.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/radhouene/custom_messages/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX shared library libmsgs-nsgs.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX shared library libmsgs-nsgs.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/msgs-nsgs.dir/link.txt --verbose=$(VERBOSE)
 	$(CMAKE_COMMAND) -E cmake_symlink_library libmsgs-nsgs.so.1.0.0 libmsgs-nsgs.so.1 libmsgs-nsgs.so
 
@@ -169,6 +169,6 @@ CMakeFiles/msgs-nsgs.dir/depend: msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc
 CMakeFiles/msgs-nsgs.dir/depend: msgs-nsgs_genmsg/gz/msgs/thermal.pb.h
 CMakeFiles/msgs-nsgs.dir/depend: msgs-nsgs_genmsg/gz_msgs_thermal.pb_index
 CMakeFiles/msgs-nsgs.dir/depend: msgs-nsgs_genmsg/python/gz/msgs/thermal_pb2.py
-	cd /home/radhouene/custom_messages/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/radhouene/custom_messages /home/radhouene/custom_messages /home/radhouene/custom_messages/build /home/radhouene/custom_messages/build /home/radhouene/custom_messages/build/CMakeFiles/msgs-nsgs.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/CMakeFiles/msgs-nsgs.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/msgs-nsgs.dir/depend
 

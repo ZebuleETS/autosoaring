@@ -1276,6 +1276,22 @@ async def run():
     # Get the package directory for config files
     pkg_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'config')
     plan_file = os.path.join(pkg_dir, 'area2.plan')
+    
+    # Check if plan file exists
+    if not os.path.exists(plan_file):
+        ros_node.get_logger().error(f"Plan file not found: {plan_file}")
+        ros_node.get_logger().error(f"Current working directory: {os.getcwd()}")
+        ros_node.get_logger().error(f"Script directory: {os.path.dirname(__file__)}")
+        ros_node.get_logger().error(f"Package directory: {pkg_dir}")
+        ros_node.get_logger().error("Available files in config directory:")
+        if os.path.exists(pkg_dir):
+            for file in os.listdir(pkg_dir):
+                ros_node.get_logger().error(f"  - {file}")
+        else:
+            ros_node.get_logger().error(f"Config directory does not exist: {pkg_dir}")
+        return
+    
+    ros_node.get_logger().info(f"Using plan file: {plan_file}")
     await waypoints_mission(drone, plan_file)
     
     # Load mission waypoints for enhanced autosoaring scenario

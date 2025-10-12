@@ -23,8 +23,8 @@ source install/setup.bash
 # Set the source directory for Python files
 SRC_DIR="$WORKSPACE_DIR/src/autosoaring_pkg/autosoaring_pkg"
 
-# Get the package directory for config files
-PKG_DIR=$(ros2 pkg prefix autosoaring_pkg)/share/autosoaring_pkg
+# Get the package directory for config files (use relative path since package may not be installed)
+PKG_DIR="$SCRIPT_DIR/src/autosoaring_pkg"
 CONFIG_FILE="$PKG_DIR/config/thermal_config.yaml"
 
 echo " Starting AutoSoaring components..."

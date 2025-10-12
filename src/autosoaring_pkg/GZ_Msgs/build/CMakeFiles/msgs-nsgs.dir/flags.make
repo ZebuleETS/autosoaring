@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -Dmsgs_nsgs_EXPORTS
 
-CXX_INCLUDES = -I/home/radhouene/custom_messages/build/msgs-nsgs_genmsg -isystem /usr/include/gz/msgs10 -isystem /usr/include/gz/math7 -isystem /usr/include/gz/utils2
+CXX_INCLUDES = -I/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/msgs-nsgs_genmsg -isystem /usr/include/gz/msgs10 -isystem /usr/include/gz/math7 -isystem /usr/include/gz/utils2
 
 CXX_FLAGS = -fPIC
 

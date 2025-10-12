@@ -1,4 +1,4 @@
-# Install script for directory: /home/radhouene/custom_messages
+# Install script for directory: /home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -55,8 +55,8 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     endif()
   endforeach()
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES
-    "/home/radhouene/custom_messages/build/libmsgs-nsgs.so.1.0.0"
-    "/home/radhouene/custom_messages/build/libmsgs-nsgs.so.1"
+    "/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/libmsgs-nsgs.so.1.0.0"
+    "/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/libmsgs-nsgs.so.1"
     )
   foreach(file
       "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libmsgs-nsgs.so.1.0.0"
@@ -78,7 +78,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libmsgs-nsgs.so"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/radhouene/custom_messages/build/libmsgs-nsgs.so")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/libmsgs-nsgs.so")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libmsgs-nsgs.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libmsgs-nsgs.so")
     if(CMAKE_INSTALL_DO_STRIP)
@@ -89,21 +89,21 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/gz/msgs" TYPE FILE FILES
-    "/home/radhouene/custom_messages/build/msgs-nsgs_genmsg/gz/msgs/thermal.pb.h"
-    "/home/radhouene/custom_messages/build/msgs-nsgs_genmsg/gz/msgs/MessageTypes.hh"
+    "/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/msgs-nsgs_genmsg/gz/msgs/thermal.pb.h"
+    "/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/msgs-nsgs_genmsg/gz/msgs/MessageTypes.hh"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/gz/msgs/details" TYPE FILE FILES "/home/radhouene/custom_messages/build/msgs-nsgs_genmsg/gz/msgs/details/thermal.pb.h")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/gz/msgs/details" TYPE FILE FILES "/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/msgs-nsgs_genmsg/gz/msgs/details/thermal.pb.h")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gz/protos" TYPE FILE FILES "/home/radhouene/custom_messages/build/msgs-nsgs.gz_desc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gz/protos" TYPE FILE FILES "/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/msgs-nsgs.gz_desc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python/gz/msgs" TYPE FILE FILES "/home/radhouene/custom_messages/build/msgs-nsgs_genmsg/python/gz/msgs/thermal_pb2.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python/gz/msgs" TYPE FILE FILES "/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/msgs-nsgs_genmsg/python/gz/msgs/thermal_pb2.py")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -114,5 +114,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/radhouene/custom_messages/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/radhouene/autosoaring/src/autosoaring_pkg/GZ_Msgs/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

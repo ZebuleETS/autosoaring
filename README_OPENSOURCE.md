@@ -42,8 +42,8 @@ cd autosoaring
 ./setup_autosoaring.sh install
 
 # Or step by step:
-./setup_autosoaring.sh setup    # Check dependencies
-./setup_autosoaring.sh build    # Build ROS2 workspace
+./setup_autosoaring.sh setup    # Check dependencies and build GZ_Msgs
+./setup_autosoaring.sh build    # Build GZ_Msgs and ROS2 workspace
 ```
 
 ### 3. Start the System
@@ -196,7 +196,27 @@ Configure in `battery_manager_node.py`:
    colcon build
    ```
 
-4. **"No thermal data"**
+4. **"Config file not found" or "Plan file not found"**
+   ```bash
+   # Ensure you're running from the correct directory
+   cd /path/to/autosoaring
+   
+   # Check if files exist
+   ls -la src/autosoaring_pkg/config/
+   
+   # If files are missing, ensure you cloned the complete repository
+   git clone <your-repo-url>
+   ```
+
+5. **"Package not found" error**
+   ```bash
+   # This is normal if the package isn't installed yet
+   # The system will work with relative paths
+   # To install the package properly:
+   ./setup_autosoaring.sh install
+   ```
+
+6. **"No thermal data"**
    - Check UAV connection
    - Verify telemetry link
    - Ensure mission is uploaded
