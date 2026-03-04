@@ -1,5 +1,9 @@
-# Mission Configuration
-qgc_plan_path: "area2.plan"  # Relative path - will be resolved from package config directory
+# Simulation Boundaries (ENU meters, matching dronePx4 params)
+# Thermals are generated directly in this coordinate space
+x_lower_bound: 0.0
+x_upper_bound: 6000.0
+y_lower_bound: 0.0
+y_upper_bound: 6000.0
 
 # Thermal Generation Configuration
 num_thermals: 12
@@ -7,6 +11,11 @@ min_distance_between_thermals: 200.0
 zi_range: [1250.0, 1250.0]       
 w_star_range: [5,5]         
 lifespan_range: [1200000.0, 1800000.0]
+
+# Algorithm-relevant thermal parameters (derived from zi/wi for dronePx4 integration)
+radius_factor: 0.1            # radius = zi * radius_factor (Allen model approximation)
+min_thermal_radius: 100.0     # minimum algorithm radius (meters)
+max_thermal_radius: 300.0     # maximum algorithm radius (meters)
 
 # Thermal Detection Configuration
 target_altitude: 600.0  # Target altitude for thermal exploitation

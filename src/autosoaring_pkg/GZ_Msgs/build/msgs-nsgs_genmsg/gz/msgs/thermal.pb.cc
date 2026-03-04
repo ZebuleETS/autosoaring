@@ -14,80 +14,82 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-extern PROTOBUF_INTERNAL_EXPORT_gz_2fmsgs_2fthermal_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Thermal_gz_2fmsgs_2fthermal_2eproto;
+
+PROTOBUF_PRAGMA_INIT_SEG
+
+namespace _pb = ::PROTOBUF_NAMESPACE_ID;
+namespace _pbi = _pb::internal;
+
 namespace gz {
 namespace msgs {
-class ThermalDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Thermal> _instance;
-} _Thermal_default_instance_;
-class ThermalGroupDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ThermalGroup> _instance;
-} _ThermalGroup_default_instance_;
+PROTOBUF_CONSTEXPR Thermal::Thermal(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.id_)*/int64_t{0}
+  , /*decltype(_impl_.x_)*/0
+  , /*decltype(_impl_.y_)*/0
+  , /*decltype(_impl_.zi_)*/0
+  , /*decltype(_impl_.wi_)*/0
+  , /*decltype(_impl_.lifetime_)*/0
+  , /*decltype(_impl_.birth_time_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct ThermalDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ThermalDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ThermalDefaultTypeInternal() {}
+  union {
+    Thermal _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ThermalDefaultTypeInternal _Thermal_default_instance_;
+PROTOBUF_CONSTEXPR ThermalGroup::ThermalGroup(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.thermals_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct ThermalGroupDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ThermalGroupDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ThermalGroupDefaultTypeInternal() {}
+  union {
+    ThermalGroup _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ThermalGroupDefaultTypeInternal _ThermalGroup_default_instance_;
 }  // namespace msgs
 }  // namespace gz
-static void InitDefaultsscc_info_Thermal_gz_2fmsgs_2fthermal_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
+static ::_pb::Metadata file_level_metadata_gz_2fmsgs_2fthermal_2eproto[2];
+static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_gz_2fmsgs_2fthermal_2eproto = nullptr;
+static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_gz_2fmsgs_2fthermal_2eproto = nullptr;
 
-  {
-    void* ptr = &::gz::msgs::_Thermal_default_instance_;
-    new (ptr) ::gz::msgs::Thermal();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::gz::msgs::Thermal::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Thermal_gz_2fmsgs_2fthermal_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Thermal_gz_2fmsgs_2fthermal_2eproto}, {}};
-
-static void InitDefaultsscc_info_ThermalGroup_gz_2fmsgs_2fthermal_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::gz::msgs::_ThermalGroup_default_instance_;
-    new (ptr) ::gz::msgs::ThermalGroup();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::gz::msgs::ThermalGroup::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_ThermalGroup_gz_2fmsgs_2fthermal_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_ThermalGroup_gz_2fmsgs_2fthermal_2eproto}, {
-      &scc_info_Thermal_gz_2fmsgs_2fthermal_2eproto.base,}};
-
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_gz_2fmsgs_2fthermal_2eproto[2];
-static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_gz_2fmsgs_2fthermal_2eproto = nullptr;
-static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_gz_2fmsgs_2fthermal_2eproto = nullptr;
-
-const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_gz_2fmsgs_2fthermal_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+const uint32_t TableStruct_gz_2fmsgs_2fthermal_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::gz::msgs::Thermal, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::gz::msgs::Thermal, id_),
-  PROTOBUF_FIELD_OFFSET(::gz::msgs::Thermal, x_),
-  PROTOBUF_FIELD_OFFSET(::gz::msgs::Thermal, y_),
-  PROTOBUF_FIELD_OFFSET(::gz::msgs::Thermal, zi_),
-  PROTOBUF_FIELD_OFFSET(::gz::msgs::Thermal, wi_),
-  PROTOBUF_FIELD_OFFSET(::gz::msgs::Thermal, lifetime_),
-  PROTOBUF_FIELD_OFFSET(::gz::msgs::Thermal, birth_time_),
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::gz::msgs::Thermal, _impl_.id_),
+  PROTOBUF_FIELD_OFFSET(::gz::msgs::Thermal, _impl_.x_),
+  PROTOBUF_FIELD_OFFSET(::gz::msgs::Thermal, _impl_.y_),
+  PROTOBUF_FIELD_OFFSET(::gz::msgs::Thermal, _impl_.zi_),
+  PROTOBUF_FIELD_OFFSET(::gz::msgs::Thermal, _impl_.wi_),
+  PROTOBUF_FIELD_OFFSET(::gz::msgs::Thermal, _impl_.lifetime_),
+  PROTOBUF_FIELD_OFFSET(::gz::msgs::Thermal, _impl_.birth_time_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::gz::msgs::ThermalGroup, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::gz::msgs::ThermalGroup, thermals_),
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::gz::msgs::ThermalGroup, _impl_.thermals_),
 };
-static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::gz::msgs::Thermal)},
-  { 12, -1, sizeof(::gz::msgs::ThermalGroup)},
+static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+  { 0, -1, -1, sizeof(::gz::msgs::Thermal)},
+  { 13, -1, -1, sizeof(::gz::msgs::ThermalGroup)},
 };
 
-static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gz::msgs::_Thermal_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::gz::msgs::_ThermalGroup_default_instance_),
+static const ::_pb::Message* const file_default_instances[] = {
+  &::gz::msgs::_Thermal_default_instance_._instance,
+  &::gz::msgs::_ThermalGroup_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_gz_2fmsgs_2fthermal_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -97,220 +99,260 @@ const char descriptor_table_protodef_gz_2fmsgs_2fthermal_2eproto[] PROTOBUF_SECT
   "\022\n\nbirth_time\030\007 \001(\002\"2\n\014ThermalGroup\022\"\n\010t"
   "hermals\030\001 \003(\0132\020.gz.msgs.Thermalb\006proto3"
   ;
-static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_gz_2fmsgs_2fthermal_2eproto_deps[1] = {
+static ::_pbi::once_flag descriptor_table_gz_2fmsgs_2fthermal_2eproto_once;
+const ::_pbi::DescriptorTable descriptor_table_gz_2fmsgs_2fthermal_2eproto = {
+    false, false, 199, descriptor_table_protodef_gz_2fmsgs_2fthermal_2eproto,
+    "gz/msgs/thermal.proto",
+    &descriptor_table_gz_2fmsgs_2fthermal_2eproto_once, nullptr, 0, 2,
+    schemas, file_default_instances, TableStruct_gz_2fmsgs_2fthermal_2eproto::offsets,
+    file_level_metadata_gz_2fmsgs_2fthermal_2eproto, file_level_enum_descriptors_gz_2fmsgs_2fthermal_2eproto,
+    file_level_service_descriptors_gz_2fmsgs_2fthermal_2eproto,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_gz_2fmsgs_2fthermal_2eproto_sccs[2] = {
-  &scc_info_Thermal_gz_2fmsgs_2fthermal_2eproto.base,
-  &scc_info_ThermalGroup_gz_2fmsgs_2fthermal_2eproto.base,
-};
-static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_gz_2fmsgs_2fthermal_2eproto_once;
-const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_gz_2fmsgs_2fthermal_2eproto = {
-  false, false, descriptor_table_protodef_gz_2fmsgs_2fthermal_2eproto, "gz/msgs/thermal.proto", 199,
-  &descriptor_table_gz_2fmsgs_2fthermal_2eproto_once, descriptor_table_gz_2fmsgs_2fthermal_2eproto_sccs, descriptor_table_gz_2fmsgs_2fthermal_2eproto_deps, 2, 0,
-  schemas, file_default_instances, TableStruct_gz_2fmsgs_2fthermal_2eproto::offsets,
-  file_level_metadata_gz_2fmsgs_2fthermal_2eproto, 2, file_level_enum_descriptors_gz_2fmsgs_2fthermal_2eproto, file_level_service_descriptors_gz_2fmsgs_2fthermal_2eproto,
-};
+PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_gz_2fmsgs_2fthermal_2eproto_getter() {
+  return &descriptor_table_gz_2fmsgs_2fthermal_2eproto;
+}
 
 // Force running AddDescriptors() at dynamic initialization time.
-static bool dynamic_init_dummy_gz_2fmsgs_2fthermal_2eproto = (static_cast<void>(::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_gz_2fmsgs_2fthermal_2eproto)), true);
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_gz_2fmsgs_2fthermal_2eproto(&descriptor_table_gz_2fmsgs_2fthermal_2eproto);
 namespace gz {
 namespace msgs {
 
 // ===================================================================
 
-void Thermal::InitAsDefaultInstance() {
-}
 class Thermal::_Internal {
  public:
 };
 
-Thermal::Thermal(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
-  SharedCtor();
-  RegisterArenaDtor(arena);
+Thermal::Thermal(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:gz.msgs.Thermal)
 }
 Thermal::Thermal(const Thermal& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
+  Thermal* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.id_){}
+    , decltype(_impl_.x_){}
+    , decltype(_impl_.y_){}
+    , decltype(_impl_.zi_){}
+    , decltype(_impl_.wi_){}
+    , decltype(_impl_.lifetime_){}
+    , decltype(_impl_.birth_time_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  ::memcpy(&id_, &from.id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&birth_time_) -
-    reinterpret_cast<char*>(&id_)) + sizeof(birth_time_));
+  ::memcpy(&_impl_.id_, &from._impl_.id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.birth_time_) -
+    reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.birth_time_));
   // @@protoc_insertion_point(copy_constructor:gz.msgs.Thermal)
 }
 
-void Thermal::SharedCtor() {
-  ::memset(&id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&birth_time_) -
-      reinterpret_cast<char*>(&id_)) + sizeof(birth_time_));
+inline void Thermal::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.id_){int64_t{0}}
+    , decltype(_impl_.x_){0}
+    , decltype(_impl_.y_){0}
+    , decltype(_impl_.zi_){0}
+    , decltype(_impl_.wi_){0}
+    , decltype(_impl_.lifetime_){0}
+    , decltype(_impl_.birth_time_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
 }
 
 Thermal::~Thermal() {
   // @@protoc_insertion_point(destructor:gz.msgs.Thermal)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
   SharedDtor();
-  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-void Thermal::SharedDtor() {
-  GOOGLE_DCHECK(GetArena() == nullptr);
+inline void Thermal::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
 }
 
-void Thermal::ArenaDtor(void* object) {
-  Thermal* _this = reinterpret_cast< Thermal* >(object);
-  (void)_this;
-}
-void Thermal::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
-}
 void Thermal::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
+  _impl_._cached_size_.Set(size);
 }
-const Thermal& Thermal::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Thermal_gz_2fmsgs_2fthermal_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void Thermal::Clear() {
 // @@protoc_insertion_point(message_clear_start:gz.msgs.Thermal)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  ::memset(&id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&birth_time_) -
-      reinterpret_cast<char*>(&id_)) + sizeof(birth_time_));
+  ::memset(&_impl_.id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.birth_time_) -
+      reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.birth_time_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* Thermal::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+const char* Thermal::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
       // int64 id = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-        } else goto handle_unusual;
+        } else
+          goto handle_unusual;
         continue;
       // float x = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 21)) {
-          x_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 21)) {
+          _impl_.x_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
-        } else goto handle_unusual;
+        } else
+          goto handle_unusual;
         continue;
       // float y = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
-          y_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
+          _impl_.y_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
-        } else goto handle_unusual;
+        } else
+          goto handle_unusual;
         continue;
       // float zi = 4;
       case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 37)) {
-          zi_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 37)) {
+          _impl_.zi_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
-        } else goto handle_unusual;
+        } else
+          goto handle_unusual;
         continue;
       // float wi = 5;
       case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 45)) {
-          wi_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 45)) {
+          _impl_.wi_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
-        } else goto handle_unusual;
+        } else
+          goto handle_unusual;
         continue;
       // float lifetime = 6;
       case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 53)) {
-          lifetime_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 53)) {
+          _impl_.lifetime_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
-        } else goto handle_unusual;
+        } else
+          goto handle_unusual;
         continue;
       // float birth_time = 7;
       case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 61)) {
-          birth_time_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 61)) {
+          _impl_.birth_time_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
-        } else goto handle_unusual;
+        } else
+          goto handle_unusual;
         continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag,
-            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-            ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
+      default:
+        goto handle_unusual;
     }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
   }  // while
-success:
+message_done:
   return ptr;
 failure:
   ptr = nullptr;
-  goto success;
+  goto message_done;
 #undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* Thermal::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+uint8_t* Thermal::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:gz.msgs.Thermal)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   // int64 id = 1;
-  if (this->id() != 0) {
+  if (this->_internal_id() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(1, this->_internal_id(), target);
+    target = ::_pbi::WireFormatLite::WriteInt64ToArray(1, this->_internal_id(), target);
   }
 
   // float x = 2;
-  if (!(this->x() <= 0 && this->x() >= 0)) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_x = this->_internal_x();
+  uint32_t raw_x;
+  memcpy(&raw_x, &tmp_x, sizeof(tmp_x));
+  if (raw_x != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->_internal_x(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(2, this->_internal_x(), target);
   }
 
   // float y = 3;
-  if (!(this->y() <= 0 && this->y() >= 0)) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_y = this->_internal_y();
+  uint32_t raw_y;
+  memcpy(&raw_y, &tmp_y, sizeof(tmp_y));
+  if (raw_y != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->_internal_y(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_y(), target);
   }
 
   // float zi = 4;
-  if (!(this->zi() <= 0 && this->zi() >= 0)) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_zi = this->_internal_zi();
+  uint32_t raw_zi;
+  memcpy(&raw_zi, &tmp_zi, sizeof(tmp_zi));
+  if (raw_zi != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(4, this->_internal_zi(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(4, this->_internal_zi(), target);
   }
 
   // float wi = 5;
-  if (!(this->wi() <= 0 && this->wi() >= 0)) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_wi = this->_internal_wi();
+  uint32_t raw_wi;
+  memcpy(&raw_wi, &tmp_wi, sizeof(tmp_wi));
+  if (raw_wi != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(5, this->_internal_wi(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(5, this->_internal_wi(), target);
   }
 
   // float lifetime = 6;
-  if (!(this->lifetime() <= 0 && this->lifetime() >= 0)) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_lifetime = this->_internal_lifetime();
+  uint32_t raw_lifetime;
+  memcpy(&raw_lifetime, &tmp_lifetime, sizeof(tmp_lifetime));
+  if (raw_lifetime != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(6, this->_internal_lifetime(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(6, this->_internal_lifetime(), target);
   }
 
   // float birth_time = 7;
-  if (!(this->birth_time() <= 0 && this->birth_time() >= 0)) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_birth_time = this->_internal_birth_time();
+  uint32_t raw_birth_time;
+  memcpy(&raw_birth_time, &tmp_birth_time, sizeof(tmp_birth_time));
+  if (raw_birth_time != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(7, this->_internal_birth_time(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(7, this->_internal_birth_time(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:gz.msgs.Thermal)
@@ -321,106 +363,133 @@ size_t Thermal::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:gz.msgs.Thermal)
   size_t total_size = 0;
 
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   // int64 id = 1;
-  if (this->id() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
-        this->_internal_id());
+  if (this->_internal_id() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_id());
   }
 
   // float x = 2;
-  if (!(this->x() <= 0 && this->x() >= 0)) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_x = this->_internal_x();
+  uint32_t raw_x;
+  memcpy(&raw_x, &tmp_x, sizeof(tmp_x));
+  if (raw_x != 0) {
     total_size += 1 + 4;
   }
 
   // float y = 3;
-  if (!(this->y() <= 0 && this->y() >= 0)) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_y = this->_internal_y();
+  uint32_t raw_y;
+  memcpy(&raw_y, &tmp_y, sizeof(tmp_y));
+  if (raw_y != 0) {
     total_size += 1 + 4;
   }
 
   // float zi = 4;
-  if (!(this->zi() <= 0 && this->zi() >= 0)) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_zi = this->_internal_zi();
+  uint32_t raw_zi;
+  memcpy(&raw_zi, &tmp_zi, sizeof(tmp_zi));
+  if (raw_zi != 0) {
     total_size += 1 + 4;
   }
 
   // float wi = 5;
-  if (!(this->wi() <= 0 && this->wi() >= 0)) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_wi = this->_internal_wi();
+  uint32_t raw_wi;
+  memcpy(&raw_wi, &tmp_wi, sizeof(tmp_wi));
+  if (raw_wi != 0) {
     total_size += 1 + 4;
   }
 
   // float lifetime = 6;
-  if (!(this->lifetime() <= 0 && this->lifetime() >= 0)) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_lifetime = this->_internal_lifetime();
+  uint32_t raw_lifetime;
+  memcpy(&raw_lifetime, &tmp_lifetime, sizeof(tmp_lifetime));
+  if (raw_lifetime != 0) {
     total_size += 1 + 4;
   }
 
   // float birth_time = 7;
-  if (!(this->birth_time() <= 0 && this->birth_time() >= 0)) {
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_birth_time = this->_internal_birth_time();
+  uint32_t raw_birth_time;
+  memcpy(&raw_birth_time, &tmp_birth_time, sizeof(tmp_birth_time));
+  if (raw_birth_time != 0) {
     total_size += 1 + 4;
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
-  }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void Thermal::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:gz.msgs.Thermal)
-  GOOGLE_DCHECK_NE(&from, this);
-  const Thermal* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<Thermal>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:gz.msgs.Thermal)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:gz.msgs.Thermal)
-    MergeFrom(*source);
-  }
-}
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Thermal::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    Thermal::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Thermal::GetClassData() const { return &_class_data_; }
 
-void Thermal::MergeFrom(const Thermal& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:gz.msgs.Thermal)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+
+void Thermal::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<Thermal*>(&to_msg);
+  auto& from = static_cast<const Thermal&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:gz.msgs.Thermal)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.id() != 0) {
-    _internal_set_id(from._internal_id());
+  if (from._internal_id() != 0) {
+    _this->_internal_set_id(from._internal_id());
   }
-  if (!(from.x() <= 0 && from.x() >= 0)) {
-    _internal_set_x(from._internal_x());
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_x = from._internal_x();
+  uint32_t raw_x;
+  memcpy(&raw_x, &tmp_x, sizeof(tmp_x));
+  if (raw_x != 0) {
+    _this->_internal_set_x(from._internal_x());
   }
-  if (!(from.y() <= 0 && from.y() >= 0)) {
-    _internal_set_y(from._internal_y());
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_y = from._internal_y();
+  uint32_t raw_y;
+  memcpy(&raw_y, &tmp_y, sizeof(tmp_y));
+  if (raw_y != 0) {
+    _this->_internal_set_y(from._internal_y());
   }
-  if (!(from.zi() <= 0 && from.zi() >= 0)) {
-    _internal_set_zi(from._internal_zi());
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_zi = from._internal_zi();
+  uint32_t raw_zi;
+  memcpy(&raw_zi, &tmp_zi, sizeof(tmp_zi));
+  if (raw_zi != 0) {
+    _this->_internal_set_zi(from._internal_zi());
   }
-  if (!(from.wi() <= 0 && from.wi() >= 0)) {
-    _internal_set_wi(from._internal_wi());
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_wi = from._internal_wi();
+  uint32_t raw_wi;
+  memcpy(&raw_wi, &tmp_wi, sizeof(tmp_wi));
+  if (raw_wi != 0) {
+    _this->_internal_set_wi(from._internal_wi());
   }
-  if (!(from.lifetime() <= 0 && from.lifetime() >= 0)) {
-    _internal_set_lifetime(from._internal_lifetime());
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_lifetime = from._internal_lifetime();
+  uint32_t raw_lifetime;
+  memcpy(&raw_lifetime, &tmp_lifetime, sizeof(tmp_lifetime));
+  if (raw_lifetime != 0) {
+    _this->_internal_set_lifetime(from._internal_lifetime());
   }
-  if (!(from.birth_time() <= 0 && from.birth_time() >= 0)) {
-    _internal_set_birth_time(from._internal_birth_time());
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_birth_time = from._internal_birth_time();
+  uint32_t raw_birth_time;
+  memcpy(&raw_birth_time, &tmp_birth_time, sizeof(tmp_birth_time));
+  if (raw_birth_time != 0) {
+    _this->_internal_set_birth_time(from._internal_birth_time());
   }
-}
-
-void Thermal::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:gz.msgs.Thermal)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Thermal::CopyFrom(const Thermal& from) {
@@ -436,92 +505,91 @@ bool Thermal::IsInitialized() const {
 
 void Thermal::InternalSwap(Thermal* other) {
   using std::swap;
-  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(Thermal, birth_time_)
-      + sizeof(Thermal::birth_time_)
-      - PROTOBUF_FIELD_OFFSET(Thermal, id_)>(
-          reinterpret_cast<char*>(&id_),
-          reinterpret_cast<char*>(&other->id_));
+      PROTOBUF_FIELD_OFFSET(Thermal, _impl_.birth_time_)
+      + sizeof(Thermal::_impl_.birth_time_)
+      - PROTOBUF_FIELD_OFFSET(Thermal, _impl_.id_)>(
+          reinterpret_cast<char*>(&_impl_.id_),
+          reinterpret_cast<char*>(&other->_impl_.id_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata Thermal::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_gz_2fmsgs_2fthermal_2eproto_getter, &descriptor_table_gz_2fmsgs_2fthermal_2eproto_once,
+      file_level_metadata_gz_2fmsgs_2fthermal_2eproto[0]);
 }
-
 
 // ===================================================================
 
-void ThermalGroup::InitAsDefaultInstance() {
-}
 class ThermalGroup::_Internal {
  public:
 };
 
-ThermalGroup::ThermalGroup(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
-  thermals_(arena) {
-  SharedCtor();
-  RegisterArenaDtor(arena);
+ThermalGroup::ThermalGroup(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:gz.msgs.ThermalGroup)
 }
 ThermalGroup::ThermalGroup(const ThermalGroup& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      thermals_(from.thermals_) {
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  ThermalGroup* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.thermals_){from._impl_.thermals_}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:gz.msgs.ThermalGroup)
 }
 
-void ThermalGroup::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ThermalGroup_gz_2fmsgs_2fthermal_2eproto.base);
+inline void ThermalGroup::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.thermals_){arena}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
 }
 
 ThermalGroup::~ThermalGroup() {
   // @@protoc_insertion_point(destructor:gz.msgs.ThermalGroup)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
   SharedDtor();
-  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-void ThermalGroup::SharedDtor() {
-  GOOGLE_DCHECK(GetArena() == nullptr);
+inline void ThermalGroup::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.thermals_.~RepeatedPtrField();
 }
 
-void ThermalGroup::ArenaDtor(void* object) {
-  ThermalGroup* _this = reinterpret_cast< ThermalGroup* >(object);
-  (void)_this;
-}
-void ThermalGroup::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
-}
 void ThermalGroup::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
+  _impl_._cached_size_.Set(size);
 }
-const ThermalGroup& ThermalGroup::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ThermalGroup_gz_2fmsgs_2fthermal_2eproto.base);
-  return *internal_default_instance();
-}
-
 
 void ThermalGroup::Clear() {
 // @@protoc_insertion_point(message_clear_start:gz.msgs.ThermalGroup)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  thermals_.Clear();
+  _impl_.thermals_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* ThermalGroup::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+const char* ThermalGroup::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
       // repeated .gz.msgs.Thermal thermals = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr -= 1;
           do {
             ptr += 1;
@@ -529,46 +597,48 @@ const char* ThermalGroup::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_I
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
-        } else goto handle_unusual;
+        } else
+          goto handle_unusual;
         continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag,
-            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-            ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
+      default:
+        goto handle_unusual;
     }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
   }  // while
-success:
+message_done:
   return ptr;
 failure:
   ptr = nullptr;
-  goto success;
+  goto message_done;
 #undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* ThermalGroup::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+uint8_t* ThermalGroup::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:gz.msgs.ThermalGroup)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   // repeated .gz.msgs.Thermal thermals = 1;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->_internal_thermals_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_thermals_size()); i < n; i++) {
+    const auto& repfield = this->_internal_thermals(i);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(1, this->_internal_thermals(i), target, stream);
+        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:gz.msgs.ThermalGroup)
@@ -579,56 +649,37 @@ size_t ThermalGroup::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:gz.msgs.ThermalGroup)
   size_t total_size = 0;
 
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   // repeated .gz.msgs.Thermal thermals = 1;
   total_size += 1UL * this->_internal_thermals_size();
-  for (const auto& msg : this->thermals_) {
+  for (const auto& msg : this->_impl_.thermals_) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
-  }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void ThermalGroup::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:gz.msgs.ThermalGroup)
-  GOOGLE_DCHECK_NE(&from, this);
-  const ThermalGroup* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ThermalGroup>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:gz.msgs.ThermalGroup)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:gz.msgs.ThermalGroup)
-    MergeFrom(*source);
-  }
-}
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData ThermalGroup::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    ThermalGroup::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*ThermalGroup::GetClassData() const { return &_class_data_; }
 
-void ThermalGroup::MergeFrom(const ThermalGroup& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:gz.msgs.ThermalGroup)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+
+void ThermalGroup::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<ThermalGroup*>(&to_msg);
+  auto& from = static_cast<const ThermalGroup&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:gz.msgs.ThermalGroup)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  thermals_.MergeFrom(from.thermals_);
-}
-
-void ThermalGroup::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:gz.msgs.ThermalGroup)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_impl_.thermals_.MergeFrom(from._impl_.thermals_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void ThermalGroup::CopyFrom(const ThermalGroup& from) {
@@ -644,23 +695,26 @@ bool ThermalGroup::IsInitialized() const {
 
 void ThermalGroup::InternalSwap(ThermalGroup* other) {
   using std::swap;
-  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
-  thermals_.InternalSwap(&other->thermals_);
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.thermals_.InternalSwap(&other->_impl_.thermals_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata ThermalGroup::GetMetadata() const {
-  return GetMetadataStatic();
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_gz_2fmsgs_2fthermal_2eproto_getter, &descriptor_table_gz_2fmsgs_2fthermal_2eproto_once,
+      file_level_metadata_gz_2fmsgs_2fthermal_2eproto[1]);
 }
-
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace msgs
 }  // namespace gz
 PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::gz::msgs::Thermal* Arena::CreateMaybeMessage< ::gz::msgs::Thermal >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::gz::msgs::Thermal*
+Arena::CreateMaybeMessage< ::gz::msgs::Thermal >(Arena* arena) {
   return Arena::CreateMessageInternal< ::gz::msgs::Thermal >(arena);
 }
-template<> PROTOBUF_NOINLINE ::gz::msgs::ThermalGroup* Arena::CreateMaybeMessage< ::gz::msgs::ThermalGroup >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::gz::msgs::ThermalGroup*
+Arena::CreateMaybeMessage< ::gz::msgs::ThermalGroup >(Arena* arena) {
   return Arena::CreateMessageInternal< ::gz::msgs::ThermalGroup >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE

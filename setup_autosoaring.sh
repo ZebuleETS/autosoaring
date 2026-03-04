@@ -59,8 +59,8 @@ setup_environment() {
     echo -e "${BLUE}Checking dependencies...${NC}"
     
     if ! command_exists ros2; then
-        echo -e "${RED}Error: ROS2 not found. Please install ROS2 Humble.${NC}"
-        echo -e "${YELLOW}Installation guide: https://docs.ros.org/en/humble/Installation.html${NC}"
+        echo -e "${RED}Error: ROS2 not found. Please install ROS2 Jazzy.${NC}"
+        echo -e "${YELLOW}Installation guide: https://docs.ros.org/en/jazzy/Installation.html${NC}"
         return 1
     fi
     
@@ -182,7 +182,7 @@ build_workspace() {
     cd "$AUTOSOARING_WORKSPACE_DIR"
     
     echo -e "${BLUE}Sourcing ROS2 environment...${NC}"
-    source /opt/ros/humble/setup.bash
+    source /opt/ros/jazzy/setup.bash
     
     echo -e "${BLUE}Building workspace...${NC}"
     if colcon build; then

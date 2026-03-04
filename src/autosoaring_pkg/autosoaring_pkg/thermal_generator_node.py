@@ -6,25 +6,23 @@ import math
 import os
 import sys
 import gz.transport13 as gz
-from shapely.geometry import Polygon, Point
 
-# Add GZ_Msgs directory to Python path for protobuf imports
-current_dir = os.path.dirname(os.path.abspath(__file__))
-gz_msgs_dir = os.path.join(current_dir, '..', 'GZ_Msgs', 'python')
-if os.path.exists(gz_msgs_dir):
-    sys.path.insert(0, gz_msgs_dir)
-
-import thermal_msg_pb2
+# Protobuf message (copié dans le package pour que colcon l'installe)
+from autosoaring_pkg import thermal_msg_pb2
 
 # ROS2 Imports
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import Float32MultiArray
+from std_msgs.msg import Float32MultiArray, String
 
 # Origin in GPS (lat, lon) corresponding to (x=0, y=0) in Gazebo
 ORIGIN_LAT = 47.397971057728974
 ORIGIN_LON = 8.546163739800146
 EARTH_RADIUS = 6371000  # in meters
+
+# Number of floats per thermal in the ROS message
+# [id, lon, lat, x_enu, y_enu, radius, strength, lifetime, birth_time]
+FIELDS_PER_THERMAL = 9
 
 
 def haversine_xy(lat, lon):
@@ -38,21 +36,11 @@ def haversine_xy(lat, lon):
     return x, y
 
 
-def calculate_distance(lat1, lon1, lat2, lon2):
-    """Calculate the distance between two GPS coordinates using Haversine formula."""
-    lat1_rad = math.radians(lat1)
-    lon1_rad = math.radians(lon1)
-    lat2_rad = math.radians(lat2)
-    lon2_rad = math.radians(lon2)
-    
-    dlat = lat2_rad - lat1_rad
-    dlon = lon2_rad - lon1_rad
-    
-    a = math.sin(dlat/2)**2 + math.cos(lat1_rad) * math.cos(lat2_rad) * math.sin(dlon/2)**2
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
-    distance = EARTH_RADIUS * c
-    
-    return distance
+def enu_to_gps(x, y):
+    """Convert ENU (x=East, y=North) in meters back to (lat, lon) using the origin."""
+    lat = ORIGIN_LAT + math.degrees(y / EARTH_RADIUS)
+    lon = ORIGIN_LON + math.degrees(x / (EARTH_RADIUS * math.cos(math.radians(ORIGIN_LAT))))
+    return lat, lon
 
 
 class ThermalGenerator(Node):
@@ -71,33 +59,38 @@ class ThermalGenerator(Node):
         with open(config_file, 'r') as f:
             cfg = yaml.safe_load(f)
 
-        # Resolve plan file path relative to config directory
-        plan_path = cfg['qgc_plan_path']
-        if not os.path.isabs(plan_path):
-            # If it's a relative path, resolve it relative to the config file directory
-            config_dir = os.path.dirname(config_file)
-            self.plan_file = os.path.join(config_dir, plan_path)
-        else:
-            self.plan_file = plan_path
-        
-        # self.get_logger().info(f"Plan file path: {self.plan_file}")
         self.n_thermals = cfg['num_thermals']
         self.zi_range = cfg['zi_range']
         self.w_star_range = cfg['w_star_range']
         self.lifespan_range = cfg['lifespan_range']
         self.min_distance = cfg.get('min_distance_between_thermals', 150.0)  # Read from YAML
+
+        # Algorithm-relevant params (radius/strength derived from Gazebo zi/wi)
+        # zi is convective boundary layer height → thermal radius ≈ 0.1 * zi (Allen model)
+        # wi is convective velocity scale → maps directly to updraft strength (m/s)
+        self.radius_factor = cfg.get('radius_factor', 0.1)  # radius = zi * factor
+        self.min_radius = cfg.get('min_thermal_radius', 100.0)
+        self.max_radius = cfg.get('max_thermal_radius', 300.0)
+
         self.thermals = []
         self.sim_time = 0
         self.next_id = 0
 
-        # ROS2 Publisher
-        self.ros_pub = self.create_publisher(Float32MultiArray, '/generated_thermals', 10)
+        # Simulation bounds (ENU meters) — thermals are generated directly in this space
+        self.x_min = cfg.get('x_lower_bound', 0.0)
+        self.x_max = cfg.get('x_upper_bound', 6000.0)
+        self.y_min = cfg.get('y_lower_bound', 0.0)
+        self.y_max = cfg.get('y_upper_bound', 6000.0)
+        self.get_logger().info(
+            f"Simulation bounds (ENU): X=[{self.x_min}, {self.x_max}], Y=[{self.y_min}, {self.y_max}]")
 
-        # Geofence
-        self.gps_polygon = self.read_geofence(self.plan_file)
-        self.bounding_box = self.gps_polygon.bounds
-        # self.get_logger().info(f"Geofence bounds: {self.bounding_box}")
-        # self.get_logger().info(f"Minimum distance between thermals: {self.min_distance}m")
+        # ROS2 Publishers
+        # /generated_thermals: incremental (new thermals only) compatible with mapping node
+        self.ros_pub = self.create_publisher(Float32MultiArray, '/generated_thermals', 10)
+        # /thermal_snapshot: full list of ALL active thermals (for algorithm bridge)
+        self.snapshot_pub = self.create_publisher(Float32MultiArray, '/thermal_snapshot', 10)
+        # /thermal_removed: IDs of thermals that expired (for algorithm cleanup)
+        self.removed_pub = self.create_publisher(Float32MultiArray, '/thermal_removed', 10)
 
         # Gazebo publisher
         self.gz_node = gz.Node()
@@ -108,42 +101,45 @@ class ThermalGenerator(Node):
         self.generate_initial_thermals()
         self.run_loop()
 
-    def read_geofence(self, plan_file):
-        with open(plan_file, 'r') as f:
-            data = json.load(f)
-            coords = data['geoFence']['polygons'][0]['polygon']
-            return Polygon([(lat, lon) for lat, lon in coords])
+    def _compute_radius(self, zi):
+        """Derive algorithm-usable thermal radius from Gazebo zi parameter."""
+        r = zi * self.radius_factor
+        return max(self.min_radius, min(self.max_radius, r))
 
-    def is_valid_thermal_location(self, lat, lon):
-        """Check if a thermal location is valid (within geofence and minimum distance from others)."""
-        # Check if within geofence
-        if not self.gps_polygon.covers(Point(lat, lon)):
+    def is_valid_thermal_location(self, x, y):
+        """Check if a thermal location (ENU meters) is valid (inside bounds and far enough from others)."""
+        if not (self.x_min <= x <= self.x_max and self.y_min <= y <= self.y_max):
             return False
-        
-        # Check minimum distance from existing thermals
+
+        # Check minimum distance from existing thermals (Euclidean in ENU)
         for thermal in self.thermals:
-            distance = calculate_distance(lat, lon, thermal["lat"], thermal["lon"])
-            if distance < self.min_distance:
+            dx = x - thermal["x"]
+            dy = y - thermal["y"]
+            if math.sqrt(dx * dx + dy * dy) < self.min_distance:
                 return False
-        
+
         return True
 
     def generate_thermal(self, thermal_id):
-        minx, miny, maxx, maxy = self.bounding_box
         for _ in range(1000):  # Try up to 1000 times to find a valid location
-            lat = random.uniform(minx, maxx)
-            lon = random.uniform(miny, maxy)
-            
-            if self.is_valid_thermal_location(lat, lon):
-                x, y = haversine_xy(lat, lon)
+            x = random.uniform(self.x_min, self.x_max)
+            y = random.uniform(self.y_min, self.y_max)
+
+            if self.is_valid_thermal_location(x, y):
+                lat, lon = enu_to_gps(x, y)
+                zi = random.uniform(*self.zi_range)
+                wi = random.uniform(*self.w_star_range)
+                radius = self._compute_radius(zi)
                 return {
                     "id": thermal_id,
                     "lat": lat,
                     "lon": lon,
                     "x": x,
                     "y": y,
-                    "zi": random.uniform(*self.zi_range),
-                    "wi": random.uniform(*self.w_star_range),
+                    "zi": zi,
+                    "wi": wi,
+                    "radius": radius,      # algorithm-usable radius (m)
+                    "strength": wi,         # updraft strength (m/s)
                     "lifetime": random.uniform(*self.lifespan_range),
                     "birth_time": self.sim_time
                 }
@@ -162,8 +158,18 @@ class ThermalGenerator(Node):
 
     def update_thermals(self):
         self.sim_time += 2
-        # Remove expired thermals
+        # Find expired thermals before removing
+        prev_ids = {t["id"] for t in self.thermals}
         self.thermals = [t for t in self.thermals if self.sim_time <= t["birth_time"] + t["lifetime"]]
+        curr_ids = {t["id"] for t in self.thermals}
+        removed_ids = prev_ids - curr_ids
+
+        # Publish removed thermal IDs so subscribers can clean up
+        if removed_ids:
+            rm_msg = Float32MultiArray()
+            rm_msg.data = [float(tid) for tid in removed_ids]
+            self.removed_pub.publish(rm_msg)
+
         new_thermals = []
 
         # Generate new thermals to maintain count
@@ -183,7 +189,8 @@ class ThermalGenerator(Node):
             return
 
         msg = thermal_msg_pb2.ThermalGroup()
-        ros_msg = Float32MultiArray()
+        ros_msg = Float32MultiArray()        # mapping-compatible (id, lon, lat)
+        ros_msg_full = Float32MultiArray()   # full data for algorithm bridge
 
         for t in thermals_to_publish:
             m = msg.thermals.add()
@@ -195,22 +202,51 @@ class ThermalGenerator(Node):
             m.lifetime = t["lifetime"]
             m.birth_time = t["birth_time"]
 
-            # Pack all thermals into a single ROS message
+            # Compact message for mapping node (backward compatible)
             ros_msg.data.extend([float(t["id"]), float(t["lon"]), float(t["lat"])])
+
+            # Full message for algorithm bridge (FIELDS_PER_THERMAL floats per thermal)
+            ros_msg_full.data.extend([
+                float(t["id"]),
+                float(t["lon"]),
+                float(t["lat"]),
+                float(t["x"]),          # ENU x (meters)
+                float(t["y"]),          # ENU y (meters)
+                float(t["radius"]),     # algorithm radius (meters)
+                float(t["strength"]),   # updraft strength (m/s)
+                float(t["lifetime"]),   # duration (seconds)
+                float(t["birth_time"]), # birth time in sim seconds
+            ])
 
         self.gz_pub.publish(msg)
         self.ros_pub.publish(ros_msg)
 
-        # self.get_logger().info(
-        #     f"Published {len(thermals_to_publish)} new thermals at time {self.sim_time}s"
-        # )
-        # self.get_logger().info(f"ROS message data: {ros_msg.data}")
+    def publish_snapshot(self):
+        """Publish the full list of ALL currently active thermals."""
+        if not self.thermals:
+            return
+        snap_msg = Float32MultiArray()
+        for t in self.thermals:
+            snap_msg.data.extend([
+                float(t["id"]),
+                float(t["lon"]),
+                float(t["lat"]),
+                float(t["x"]),
+                float(t["y"]),
+                float(t["radius"]),
+                float(t["strength"]),
+                float(t["lifetime"]),
+                float(t["birth_time"]),
+            ])
+        self.snapshot_pub.publish(snap_msg)
 
     def run_loop(self):
         while rclpy.ok():
             new_thermals = self.update_thermals()
             if new_thermals:
                 self.publish_thermals(new_thermals)
+            # Always publish full snapshot so late-joining subscribers get all thermals
+            self.publish_snapshot()
             rclpy.spin_once(self, timeout_sec=0.1)
             time.sleep(2)
 

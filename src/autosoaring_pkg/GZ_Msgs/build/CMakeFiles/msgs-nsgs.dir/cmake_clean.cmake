@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  ".1"
   "CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.o"
   "CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/register.cc.o.d"
   "CMakeFiles/msgs-nsgs.dir/msgs-nsgs_genmsg/gz/msgs/thermal.pb.cc.o"
