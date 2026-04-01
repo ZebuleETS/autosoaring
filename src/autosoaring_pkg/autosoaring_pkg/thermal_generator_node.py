@@ -59,7 +59,7 @@ class ThermalGenerator(Node):
         with open(config_file, 'r') as f:
             cfg = yaml.safe_load(f)
 
-        self.n_thermals = cfg['num_thermals']
+        self.n_thermals = random.randint(cfg['n_thermals_range'][0], cfg['n_thermals_range'][1])
         self.zi_range = cfg['zi_range']
         self.w_star_range = cfg['w_star_range']
         self.lifespan_range = cfg['lifespan_range']
