@@ -77,10 +77,10 @@ class ThermalGenerator(Node):
         self.next_id = 0
 
         # Simulation bounds (ENU meters) — thermals are generated directly in this space
-        self.x_min = cfg.get('x_lower_bound', -3000.0)
-        self.x_max = cfg.get('x_upper_bound', 3000.0)
-        self.y_min = cfg.get('y_lower_bound', -3000.0)
-        self.y_max = cfg.get('y_upper_bound', 3000.0)
+        self.x_min = cfg.get('x_lower_bound', -1500.0)
+        self.x_max = cfg.get('x_upper_bound', 1500.0)
+        self.y_min = cfg.get('y_lower_bound', -1500.0)
+        self.y_max = cfg.get('y_upper_bound', 1500.0)
         self.get_logger().info(
             f"Simulation bounds (ENU): X=[{self.x_min}, {self.x_max}], Y=[{self.y_min}, {self.y_max}]")
 

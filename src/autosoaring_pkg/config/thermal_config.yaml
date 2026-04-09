@@ -1,10 +1,10 @@
 # Simulation Boundaries (ENU meters, matching dronePx4 params)
 # Thermals are generated directly in this coordinate space
 # Zone centrée autour du home (0,0) en ENU
-x_lower_bound: -3000.0
-x_upper_bound: 3000.0
-y_lower_bound: -3000.0
-y_upper_bound: 3000.0
+x_lower_bound: -1500.0
+x_upper_bound: 1500.0
+y_lower_bound: -1500.0
+y_upper_bound: 1500.0
 
 # Thermal Generation Configuration
 n_thermals_range: [10, 15]
